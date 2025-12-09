@@ -11,6 +11,7 @@ body {
 
 #game-container {
     text-align: center;
+    position: relative;
 }
 
 canvas {
@@ -27,5 +28,54 @@ canvas {
 #controls {
     margin-top: 10px;
     color: #888;
+}
+
+#start-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 10;
+}
+
+#start-screen h1 {
+    margin-bottom: 20px;
+    font-size: 36px;
+}
+
+#startButton {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+#startButton:hover {
+    background-color: #45a049;
+}
+
+#color-palette {
+    margin-top: 20px;
+}
+
+#color-palette label {
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+#color-palette input[type="color"] {
+    margin-right: 20px;
+    width: 50px;
+    height: 50px;
+    border: none;
+    cursor: pointer;
 }
 

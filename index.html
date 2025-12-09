@@ -8,9 +8,21 @@
 </head>
 <body>
     <div id="game-container">
-        <canvas id="gameCanvas" width="400" height="400"></canvas>
-        <div id="score">Score: 0</div>
-        <div id="controls">Use Arrow Keys to Move</div>
+        <div id="start-screen">
+            <h1>Snake Game</h1>
+            <button id="startButton">Start Game</button>
+            <div id="color-palette">
+                <label for="snakeColor">Snake Color:</label>
+                <input type="color" id="snakeColor" value="#90EE90">
+                <label for="foodColor">Food Color:</label>
+                <input type="color" id="foodColor" value="#FF0000">
+            </div>
+        </div>
+        <div id="game-screen" style="display: none;">
+            <canvas id="gameCanvas" width="400" height="400"></canvas>
+            <div id="score">Score: 0</div>
+            <div id="controls">Use Arrow Keys to Move</div>
+        </div>
     </div>
     <script src="dist/game.js"></script>
 </body>
