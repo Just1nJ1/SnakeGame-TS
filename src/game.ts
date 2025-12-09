@@ -70,15 +70,16 @@ class SnakeGame {
     private startGame(): void {
         // Hide start screen and show game elements
         document.getElementById('start-screen')!.style.display = 'none';
-        document.getElementById('gameCanvas')!.style.display = 'block';
-        document.getElementById('score')!.style.display = 'block';
-        document.getElementById('controls')!.style.display = 'block';
+        document.getElementById('game-screen')!.style.display = 'block';
         
         this.gameStarted = true;
         if (this.gameInterval) clearInterval(this.gameInterval);
         this.score = 0;
         this.updateScore();
-        this.main();
+        this.drawBackground();
+        this.drawFood();
+        this.drawSnake();
+        this.gameLoop();
     }
 
     private gameOver(): void {
@@ -87,9 +88,7 @@ class SnakeGame {
         
         // Show start screen again
         document.getElementById('start-screen')!.style.display = 'block';
-        document.getElementById('gameCanvas')!.style.display = 'none';
-        document.getElementById('score')!.style.display = 'none';
-        document.getElementById('controls')!.style.display = 'none';
+        document.getElementById('game-screen')!.style.display = 'none';
         
         // Reset game state
         this.snake = [
@@ -115,7 +114,7 @@ class SnakeGame {
 
         setTimeout(() => {
             this.changingDirection = false;
-            this.clearCanvas();
+            this.drawBackground();
             this.drawFood();
             this.advanceSnake();
             this.drawSnake();
@@ -123,13 +122,6 @@ class SnakeGame {
             // Continue game loop
             this.gameLoop();
         }, 100);
-    }
-
-    private clearCanvas(): void {
-        this.ctx.fillStyle = CANVAS_BACKGROUND_COLOUR;
-        this.ctx.strokeStyle = CANVAS_BORDER_COLOUR;
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.strokeRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
     private drawSnake(): void {
@@ -199,16 +191,6 @@ class SnakeGame {
         const foodY = this.randomTen(0, this.canvas.height - 10);
 
         // Check if food spawns on snake
-        this.snake.forEach(function isFoodOnSnake(part) {
-            const foodIsoNsnake = part.x == foodX && part.y == foodY;
-            if (foodIsoNsnake) {
-                // Recursively generate new food
-                // Note: In class context this keyword handling inside forEach needs care or arrow function
-            }
-        });
-        
-        // Simple check to ensure food doesn't spawn on snake, though recursion above was incomplete
-        // Better implementation:
         for(let part of this.snake) {
             if (part.x === foodX && part.y === foodY) {
                 return this.createFood();
